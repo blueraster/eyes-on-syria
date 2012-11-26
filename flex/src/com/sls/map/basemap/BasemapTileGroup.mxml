@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TileGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			 xmlns:s="library://ns.adobe.com/flex/spark" 
+			 xmlns:mx="library://ns.adobe.com/flex/mx" 
+			 direction="ltr" 
+			 creationComplete="{init()}">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[					
+			import mx.collections.ArrayCollection;
+			public var group:String = "";
+			
+			private function init():void {
+				this.removeAllElements();
+				
+				var acList:ArrayCollection = Basemap.instance.filter(group);
+				for (var i:int=0; i<acList.length; ++i) {
+					var oBasemapVO:BasemapVO = acList[i] as BasemapVO;
+					
+					var oButton:BasemapButton = new BasemapButton();														
+					oButton.data = oBasemapVO;
+					
+					this.addElement(oButton);
+				}
+			}
+
+		]]>
+	</fx:Script>
+</s:TileGroup>

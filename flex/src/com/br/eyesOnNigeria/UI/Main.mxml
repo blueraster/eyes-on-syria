@@ -1,0 +1,760 @@
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		  xmlns:s="library://ns.adobe.com/flex/spark" 
+		  xmlns:mx="library://ns.adobe.com/flex/mx" 
+		  xmlns:esri="http://www.esri.com/2008/ags" 
+		  xmlns:ItemRenderer="com.br.eyesOnNigeria.UI.ItemRenderer.*" 
+		  xmlns:containers="com.br.eyesOnNigeria.UI.containers.*" 
+		  xmlns:tooltip="com.br.eyesOnNigeria.UI.tooltip.*"
+		  width="100%" 
+		  height="100%" 
+		  click="{pnlBasemapTile.visible = false}"  
+		  initialize="init()" 
+		  backgroundColor="#000000" xmlns:mappping="com.br.eyesOnNigeria.UI.mappping.*" xmlns:basemap="com.sls.map.basemap.*">
+	
+	<s:layout>
+		<s:HorizontalLayout gap="1"/>
+	</s:layout>
+	
+	<s:VGroup width="250" height="100%" paddingLeft="1" paddingTop="1" paddingRight="1" paddingBottom="0" gap="0">
+		<!--mx:Text selectable="true" width="100%" text="{FlexGlobals.topLevelApplication.parameters.rightMargin.toString()}" height="24"/-->
+		<s:Group id="topGroup" width="100%">
+			<containers:TitleBox title="{(this.bThemeSelected) ? this.heading : 'Eyes on Syria'}" width="100%" height="60"
+								 medium_title="{this.heading.length > 18}"/>
+			<mx:Image source="{this.locationImageURL}" width="77" height="68"
+					  click="returnToStart()" visible="{this.locationImageURL != ''}" 
+					  verticalCenter="0" right="0"/>
+		</s:Group>
+		<mx:Spacer id="topSpacer" height="20"/>
+		<s:Group width="100%" height="100%" 
+				 visible="{this.bThemeSelected}" includeInLayout="{this.bThemeSelected}">
+			<s:Scroller width="100%"
+				height="{this.nTopAreaHeight}">
+				
+		 		<s:VGroup width="100%"
+						  paddingLeft="17" paddingRight="17" paddingBottom="18" gap="0">
+					<s:VGroup width="100%" gap="5">
+						<s:HGroup width="100%" visible="{stat1_label != ''}" includeInLayout="{stat1_label !=''}">
+							<s:Label text="{stat1_label}" styleName="statLabel" width="100%"/>
+							<s:Label text="{stat1}" styleName="statValue"/>
+						</s:HGroup>
+						<s:HGroup width="100%" visible="{stat2_label != ''}" includeInLayout="{stat2_label !=''}">
+							<s:Label text="{stat2_label}" styleName="statLabel" width="100%"/>
+							<s:Label text="{stat2}" styleName="statValue"/>
+						</s:HGroup>
+						<s:HGroup width="100%" visible="{stat3_label != ''}" includeInLayout="{stat3_label !=''}">
+							<s:Label text="{stat3_label}" styleName="statLabel" width="100%"/>
+							<s:Label text="{stat3}" styleName="statValue"/>
+						</s:HGroup>
+						<s:HGroup width="100%" visible="{stat4_label != ''}" includeInLayout="{stat4_label !=''}">
+							<s:Label text="{stat4_label}" styleName="statLabel" width="100%"/>
+							<s:Label text="{stat4}" styleName="statValue"/>
+						</s:HGroup>
+					</s:VGroup>
+					<s:VGroup width="100%" gap="0"
+							  visible="{stat1_label != ''}" includeInLayout="{stat1_label != ''}">
+						<mx:Spacer height="4"/>
+						<containers:TitleBox width="100%" height="2"/>
+						<mx:Spacer height="4"/>
+					</s:VGroup>
+					<mx:Text styleName="body" width="100%" paddingLeft="-2" paddingRight="-2" 
+							 includeInLayout="{this.description != ''}"
+							 selectable="false"
+							 htmlText="{this.description}"/>
+					<mx:Spacer height="4"/>
+					<containers:TitleBox width="100%" height="2"/>
+					<mx:Spacer height="10"/>
+					<s:Label id="legendTitle" text="" styleName="body" paddingTop="0" paddingBottom="6" includeInLayout="{this.showTitle}"/>
+					<s:VGroup width="100%" paddingLeft="18" gap="10">
+						<s:VGroup id="pnlLegend" width="100%"/>
+						<s:HGroup paddingLeft="4" verticalAlign="middle" gap="10"
+								  visible="{AppConfig.instance.highlight_new_date > 0  &amp;&amp; AppConfig.instance.new_date_founded}" 
+								  includeInLayout="{AppConfig.instance.highlight_new_date > 0 &amp;&amp; AppConfig.instance.new_date_founded}">													
+							<s:Ellipse width="11" height="11" filters="{[AppConfig.instance.highlight_new_filter]}">
+								<s:fill>
+									<s:SolidColor color="0x000000"/>
+								</s:fill>
+								<s:stroke>
+									<s:SolidColorStroke color="0x000000"/>
+								</s:stroke>
+							</s:Ellipse>
+							<s:Label text="New Content"/>
+						</s:HGroup>	
+					</s:VGroup>					
+				</s:VGroup>
+			</s:Scroller>
+		</s:Group>
+		<s:VGroup id="pnlIntro" width="100%" paddingLeft="17" paddingRight="17" paddingBottom="0" 
+				  visible="{!this.bThemeSelected}" includeInLayout="{!this.bThemeSelected}">
+			<s:Label id="introHeading" text="{AppConfig.instance.introHeading}" styleName="heading"/>
+
+			<s:RichEditableText id="introText"
+								styleName="body"
+								minWidth="0" 
+								multiline="true"
+								width="100%"
+								maxHeight="265"
+								textFlow="{TextConverter.importToFlow(AppConfig.instance.introText, TextConverter.TEXT_FIELD_HTML_FORMAT)}"
+								selectable="true"
+								editable="false" />
+			<mx:Spacer height="4"/>
+			<containers:TitleBox width="100%" height="2"/>
+			<mx:Spacer height="4"/>
+		</s:VGroup>
+		<containers:TitleBox id="pnlSelectAnother" 
+							 title="Select another theme" 
+							 width="100%" 
+							 height="28" 
+							 small_text="true"
+							 visible="{this.bThemeSelected}" 
+							 includeInLayout="{this.bThemeSelected}"
+							 click="returnToStart()" />
+		<s:VGroup width="100%" height="100%" paddingLeft="17" paddingBottom="20" gap="0"
+				  paddingRight="{(themeList.height &lt; Themes.instance.themes_list.length*19+2) ? 0 : 17}">
+			<s:List id="themeList" 
+					width="100%" 
+					height="{(this.bThemeSelected) ? this.nListAreaHeight : this.nAvailableListAreaHeightOnWelcome}" 
+					dataProvider="{Themes.instance.themes_list}"
+					change="themeList_clickHandler(event)" 
+					itemRenderer="com.br.eyesOnNigeria.UI.ItemRenderer.ThemeListItemRenderer"
+					skinClass="com.br.eyesOnNigeria.UI.skins.ThemeListSkin"/>
+		</s:VGroup>
+	</s:VGroup>
+	
+	<s:VGroup width="{this.parentDocument.width-250-5-this.iPaddingRight-this.iPaddingLeft}" height="100%" paddingLeft="1" paddingTop="20" paddingRight="20" paddingBottom="20" gap="0">
+		<s:Group width="100%" height="100%">
+			<containers:TitleBox width="100%" height="100%"/>
+			<esri:Map id="oMap" width="100%" height="100%" load="handleMapLoaded()" extentChange="handleMapExtentChange()"
+					  openHandCursorVisible="false" logoVisible="false" zoomSliderVisible="false" scaleBarVisible="false" 
+					  extent="{AppConfig.instance.initial_extent}" scale="{AppConfig.instance.initial_scale}"
+					  layers="{this.aMapLayers}" 
+					  styleName="mapStyle"/>
+			<!--
+			layers="{new ArrayCollection(this.aMapLayers.toArray().concat(this.aFlickrLayers.toArray(),this.aVideoLayers.toArray()))}"
+			-->
+			<tooltip:ToolTipWrapper left="0" right="0" height="100%" GLOBAL_OBJECT="{this.GLOBAL_TOOLTIP_OBJECT}"/>
+			
+			<!-- masks for layers -->
+			<s:BorderContainer id="pnlBottomMask" 
+							   x="{(this.imageMiddleURL == '') ? 0 : oMap.width*Math.min(legendSlider.value,1)}"
+							   width="{(this.imageMiddleURL == '') ? oMap.width : oMap.width*Math.max(1-legendSlider.value,0)}" 
+							   height="100%" backgroundColor="#000000"/>
+			<s:BorderContainer id="pnlMiddleMask" 
+							   x="{(legendSlider.value>1) ? oMap.width*Math.min(legendSlider.value-1,1) : 0}"
+							   width="{(legendSlider.value>1) ? oMap.width-oMap.width*Math.min(legendSlider.value-1,1) : oMap.width*Math.min(legendSlider.value,1)}" 
+							   height="100%" backgroundColor="#000000"/>
+			<!-- 
+			<s:BorderContainer id="pnlMiddleMask" 
+							   width="{oMap.width*Math.min(legendSlider.value,1)}" 
+							   height="100%" backgroundColor="#000000"/>
+			-->
+			<s:BorderContainer id="pnlTopMask" 
+							   x="0"
+							   width="{(legendSlider.value>1) ? oMap.width*Math.min(legendSlider.value-1,1) : 0}" 
+							   height="100%" backgroundColor="#000000"/>
+			<s:BorderContainer id="pnlFirstFeatureMask" 
+							   x="{(legendSlider.value>1) ? oMap.width*Math.min(legendSlider.value-1,1) : 0}"
+							   width="{(legendSlider.value>1) ? oMap.width-oMap.width*Math.min(legendSlider.value-1,1) : oMap.width*Math.min(legendSlider.value,1)}" 
+							   height="100%" backgroundColor="#000000"/>
+			<s:BorderContainer id="pnlSecondFeatureMask" 
+							   x="0"
+							   width="{(legendSlider.value>1) ? oMap.width*Math.min(legendSlider.value-1,1) : 0}" 
+							   height="100%" backgroundColor="#000000"/>
+			
+			<!-- image theme controls -->
+			<s:BorderContainer width="{this.oMap.width}" height="48" bottom="0"
+							   backgroundColor="#000000" backgroundAlpha="0.8"
+							   visible="{legendSlider.visible}">
+				<s:Group width="{this.oMap.width}" height="48" bottom="0">
+					<mx:Slider id="legendSlider" y="6"
+							   left="6" right="6"
+							   liveDragging="true" showDataTip="false"
+							   thumbRelease="legendSlider_complete()"
+							   thumbPress="legendSlider_thumbPress()" 
+							   change="legendSlider_change()"
+							   visible="false"
+							   thumbSkin="com.br.eyesOnNigeria.UI.skins.ThumbSkin"
+							   styleName="timeSlider"/>
+					
+				</s:Group>
+			</s:BorderContainer>
+
+			<!-- all flares theme controls (years slider) -->
+			<s:BorderContainer width="{this.oMap.width}" height="48" bottom="0"
+							   backgroundColor="#000000" backgroundAlpha="0.8"
+							   visible="{yearsSlider.visible}">
+				<s:Group width="{this.oMap.width}" height="48" bottom="0">
+					<mx:Slider id="yearsSlider" y="6" snapInterval="1"
+							   left="6" right="6"
+							   liveDragging="true" showDataTip="false"
+							   thumbRelease="yearsSlider_complete()"
+							   thumbPress="yearsSlider_thumbPress()" 
+							   change="yearsSlider_change()"
+							   visible="false"
+							   thumbSkin="com.br.eyesOnNigeria.UI.skins.ThumbSkin"
+							   styleName="timeSlider"/>
+				</s:Group>
+			</s:BorderContainer>
+
+			<!-- loading icon -->
+			<mx:Image id="iLoadIcon" source="@Embed(source='/../assets/flash/LoadingIcon.swf')"
+					  verticalCenter="0" horizontalCenter="0"
+					  includeInLayout="{this.bLoading_data }"
+					  visible="{this.bLoading_data}"/>
+
+			<s:Button left="50" top="5" label="Basemaps"
+					  click="{event.stopPropagation(); pnlBasemapTile.visible = !pnlBasemapTile.visible}"
+					  skinClass="com.br.eyesOnNigeria.UI.skins.ButtonSkin"/>
+			<s:Group id="pnlBasemapTile" top="30" left="50" visible="false">
+				<s:Rect width="100%" height="100%" radiusX="5">
+					<s:fill>
+						<s:SolidColor color="0x000000" alpha="0.9"/>
+					</s:fill>
+					<s:stroke>
+						<s:SolidColorStroke color="0x999999" pixelHinting="true"/>
+					</s:stroke>
+				</s:Rect>
+				<basemap:BasemapTileGroup paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5"/>
+			</s:Group>
+		</s:Group>
+		<!--mx:Text selectable="true" width="100%" text="{this.oMap.extent}" height="24"/-->
+	</s:VGroup>
+	
+	<fx:Declarations>
+		<ItemRenderer:ThemeMarkerRenderer id="oThemeMarkerRenderer"/>
+		<s:ArrayCollection id="aMapLayers">
+			<!--esri:ArcGISTiledMapServiceLayer updateEnd="handleBaseMapUpdateEnd()"
+											 url="{AppConfig.instance.topo_url}" visible="true"/-->			
+			<esri:OpenStreetMapLayer updateEnd="handleBaseMapUpdateEnd()" visible="{Basemap.instance.selected.type == BasemapVO.OPEN_STREET}"/>
+			<esri:ArcGISTiledMapServiceLayer url="{Basemap.instance.selected.url}" visible="{Basemap.instance.selected.type == BasemapVO.TILE}"/>
+			<mappping:BasicExtentControlLayer id="lExtentControl"/>
+			
+			<!--esri:VETiledLayer key="{AppConfig.instance.ve_access_key}" mapStyle="{AppConfig.instance.ve_map_style}"/-->
+			<esri:ArcGISTiledMapServiceLayer url="{this.imageBottomURL}" visible="{this.imageBottomURL != ''}" mask="{this.pnlBottomMask}"/>
+			<esri:ArcGISTiledMapServiceLayer url="{this.imageMiddleURL}" visible="{this.imageMiddleURL != ''}" mask="{this.pnlMiddleMask}"/>
+			<esri:ArcGISTiledMapServiceLayer url="{this.imageTopURL}" visible="{this.imageTopURL != ''}" mask="{this.pnlTopMask}"/>
+			<esri:ArcGISDynamicMapServiceLayer id="DynamicLAYER" url="{this.dynamicURL}"
+											   visible="{this.dynamicURL != ''}" visibleLayers="{this.acDynamicVisibleLayers}"/>
+			<esri:FeatureLayer id="ThemeFeatureLAYER" url="{this.themeFeatureURL}"
+							   visible="{this.themeFeatureURL != ''}"
+							   renderer="{new MapSymbolRenderer(this.theme_markers, this.oMap, this.GLOBAL_TOOLTIP_OBJECT, this.theme_tooltip_data)}"
+							   />
+			<esri:FeatureLayer id="FirstFeatureLAYER" url="{this.firstFeatureURL}" mask="{this.pnlFirstFeatureMask}" 
+							   visible="{this.firstFeatureURL != '' &amp;&amp; AppConfig.instance.show_markers_first}"
+							   renderer="{new MapSymbolRenderer(this.first_feature_markers, this.oMap, this.GLOBAL_TOOLTIP_OBJECT, this.flare_tooltip_data, this.flare_selected_year)}"
+							   />
+			<esri:FeatureLayer id="SecondFeatureLAYER" url="{this.secondFeatureURL}" mask="{this.pnlSecondFeatureMask}"
+							   visible="{this.secondFeatureURL != '' &amp;&amp; AppConfig.instance.show_markers_second}"
+							   renderer="{new MapSymbolRenderer(this.second_feature_markers, this.oMap, this.GLOBAL_TOOLTIP_OBJECT)}"
+							   />						
+		</s:ArrayCollection>				
+		
+		<!--<s:ArrayCollection id="aVideoLayers">
+			<esri:GraphicsLayer id="videos" 
+								visible="{AppConfig.instance.show_markers_video}"
+								graphicProvider="{YouTubeData.instance.video_graphics}"
+								renderer="{new MapSymbolRenderer(this.video_markers, this.oMap, this.GLOBAL_TOOLTIP_OBJECT, this.video_tooltip_data)}"
+								/>
+		</s:ArrayCollection>
+		-->
+		
+		<s:Resize id="oResizeEffect" duration="500"/>
+		
+		<fx:Number id="nAvailableTopAreaHeight">{this.parentDocument.height - iPaddingTop - iPaddingBottom - (20 + topSpacer.height + pnlSelectAnother.height + topGroup.height + MIN_LIST_HEIGHT)}</fx:Number>
+		<fx:Number id="nAvailableListAreaHeight">{this.parentDocument.height - iPaddingTop - iPaddingBottom - (20 + topSpacer.height + pnlSelectAnother.height + topGroup.height + MAX_TOP_AREA_HEIGHT)}</fx:Number>
+		<fx:Number id="nAvailableListAreaHeightOnWelcome">{this.parentDocument.height - iPaddingTop - iPaddingBottom - (20 + topSpacer.height + topGroup.height + pnlIntro.height)}</fx:Number>
+		<fx:Number id="nTopAreaHeight">{Math.min(nAvailableTopAreaHeight, MAX_TOP_AREA_HEIGHT)}</fx:Number>
+		<fx:Number id="nListAreaHeight">{(nAvailableTopAreaHeight &lt; MAX_TOP_AREA_HEIGHT) ? MIN_LIST_HEIGHT : nAvailableListAreaHeight}</fx:Number>
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import base.Debug;
+			
+			import com.br.eyesOnNigeria.DF.AppController;
+			import com.br.eyesOnNigeria.DF.Data.DynamicLayerVO;
+			import com.br.eyesOnNigeria.DF.Data.HeadingVO;
+			import com.br.eyesOnNigeria.DF.Data.ImageLayerVO;
+			import com.br.eyesOnNigeria.DF.Data.MarkerVO;
+			import com.br.eyesOnNigeria.DF.Data.PointLayerVO;
+			import com.br.eyesOnNigeria.DF.Data.ThemeLayerVO;
+			import com.br.eyesOnNigeria.DF.events.AppEvent;
+			import com.br.eyesOnNigeria.DF.models.AppConfig;
+			import com.br.eyesOnNigeria.DF.models.FlickrData;
+			import com.br.eyesOnNigeria.DF.models.GlobalSharedObject;
+			import com.br.eyesOnNigeria.DF.models.Themes;
+			import com.br.eyesOnNigeria.DF.models.YouTubeData;
+			import com.br.eyesOnNigeria.UI.ItemRenderer.LegendItem;
+			import com.br.eyesOnNigeria.UI.ItemRenderer.MapSymbolRenderer;
+			import com.br.eyesOnNigeria.UI.ItemRenderer.PhotoGraphicsRenderer;
+			import com.br.eyesOnNigeria.UI.ItemRenderer.ThemeMarkerRenderer;
+			import com.esri.ags.layers.GraphicsLayer;
+			import com.sls.map.basemap.Basemap;
+			import com.sls.map.basemap.BasemapVO;
+			
+			import flashx.textLayout.conversion.TextConverter;
+			
+			import mx.core.FlexGlobals;
+			
+			import spark.events.IndexChangeEvent;
+			
+			// ===== CONSTANTS
+			private const MAP_URL_SUFFIX:String = "/MapServer";
+			private const GLOBAL_TOOLTIP_OBJECT:GlobalSharedObject = new GlobalSharedObject();
+			private const MAX_TOP_AREA_HEIGHT:int = 363;
+			private const MIN_LIST_HEIGHT:int = 8*19 + 2;	//7 rows
+			
+			// ===== UI elements show/hide
+			[Bindable]
+			private var bThemeSelected:Boolean = false;
+			[Bindable]
+			private var bLoading_data:Boolean = true;
+			
+			// ===== url changes
+			[Bindable]
+			private var imageBottomURL:String = "";
+			[Bindable]
+			private var imageMiddleURL:String = "";
+			[Bindable]
+			private var imageTopURL:String = "";
+			[Bindable]
+			private var firstFeatureURL:String = "";
+			[Bindable]
+			private var secondFeatureURL:String = "";
+			[Bindable]
+			private var themeFeatureURL:String = "";
+			[Bindable]
+			private var locationImageURL:String = "";
+			[Bindable]
+			private var dynamicURL:String = "";
+			
+			// ===== map symbol changes
+			[Bindable]
+			private var theme_markers:ArrayCollection;
+			[Bindable]
+			private var theme_tooltip_data:ArrayCollection;
+			[Bindable]
+			private var first_feature_markers:ArrayCollection;
+			[Bindable]
+			private var second_feature_markers:ArrayCollection;
+			
+			[Bindable]
+			private var video_markers:ArrayCollection;
+			[Bindable]
+			private var video_tooltip_data:ArrayCollection;
+			[Bindable]
+			private var flare_tooltip_data:ArrayCollection;
+			[Bindable]
+			private var flare_selected_year:int = -1;
+			
+			[Bindable]
+			private var acDynamicVisibleLayers:ArrayCollection = new ArrayCollection();
+			[Bindable]
+			private var showTwo:Boolean=false;
+			[Bindable]
+			private var showTitle:Boolean=false;
+			[Bindable]
+			private var iPaddingLeft:int = 0;
+			[Bindable]
+			private var iPaddingRight:int = 0;
+			[Bindable]
+			private var iPaddingTop:int = 0;
+			[Bindable]
+			private var iPaddingBottom:int = 0;
+
+			//[Bindable]
+			private var aFlickrLayers:ArrayCollection = new ArrayCollection();
+			//[Bindable]
+			private var aVideoLayers:ArrayCollection = new ArrayCollection();
+			
+			// ===== text changes
+			[Bindable] private var heading:String = "";
+			[Bindable] private var description:String = "";
+			[Bindable] private var stat1_label:String = "";
+			[Bindable] private var stat1:String = "";
+			[Bindable] private var stat2_label:String = "";
+			[Bindable] private var stat2:String = "";
+			[Bindable] private var stat3_label:String = "";
+			[Bindable] private var stat3:String = "";
+			[Bindable] private var stat4_label:String = "";
+			[Bindable] private var stat4:String = "";
+			
+			private function handleMapLoaded():void {
+				if (!this.oMap.extent.contains(AppConfig.instance.initial_extent))
+					this.oMap.level--;
+				bLoading_data = false;
+			}
+			private function handleBaseMapUpdateEnd():void {
+				if (!this.oMap.zoomSliderVisible)
+					debug(" :: LODs: " + this.oMap.lods);
+				this.oMap.zoomSliderVisible = true;
+				bLoading_data = false;
+				//this.layerThemeMarkers.visible = true;
+			}
+			
+			// MAP ============================================================================================
+			private function handleMapExtentChange():void {
+				bLoading_data = false;
+			}
+			
+			// THEMES =========================================================================================
+			private function clearPreviousSelection(full:Boolean=false):void 
+			{				
+				bLoading_data = true;
+				pnlLegend.removeAllElements();
+				var i:Number;
+				for (i = 0; i < this.aFlickrLayers.length; ++i)
+					this.oMap.removeLayer(aFlickrLayers[i]);
+				for (i = 0; i < this.aVideoLayers.length; ++i)
+					this.oMap.removeLayer(aVideoLayers[i]);
+				
+				this.aFlickrLayers.removeAll();
+				this.aVideoLayers.removeAll();
+				FlickrData.instance.clearGraphics();
+				FlickrData.instance.removeAllTagDestinations();
+				YouTubeData.instance.clearGraphics();
+				YouTubeData.instance.removeAllTagDestinations();
+				
+				imageBottomURL 	= "";
+				imageMiddleURL 	= "";
+				imageTopURL		= "";
+				firstFeatureURL = "";
+				secondFeatureURL = "";
+				themeFeatureURL = "";
+				locationImageURL = "";
+				dynamicURL = "";
+				acDynamicVisibleLayers = new ArrayCollection();
+				stat1_label = "";
+				stat1 = "";
+				stat2_label = "";
+				stat2 = "";
+				stat3_label = "";
+				stat3 = "";
+				stat4_label = "";
+				stat4 = "";
+				
+				this.theme_tooltip_data = null;				
+				this.video_tooltip_data = null;
+				this.flare_tooltip_data = null;
+				this.flare_selected_year = -1;
+				
+				if (full) {
+					heading = "";
+					description = "";
+				}
+				AppConfig.instance.new_date_founded = false;
+			}
+			private function selectFirstThemeUnderHeading():void 
+			{
+				this.themeList.selectedIndex = this.themeList.selectedIndex + 1;
+				this.themeList.dispatchEvent(new IndexChangeEvent(IndexChangeEvent.CHANGE, false, false, this.themeList.selectedIndex-1, this.themeList.selectedIndex));
+			}
+			
+			private function updateSelectedTheme(headingInfo:HeadingVO=null):void
+			{				
+				var aFlickrTags:Array = [];
+				if (headingInfo) 
+				{
+					if (headingInfo.heading) 
+					{
+						//Select first item under heading
+						this.callLater(this.selectFirstThemeUnderHeading);
+					} 
+						
+					else 
+					{
+						// ===== clean up last selection
+						this.clearPreviousSelection();
+						
+						Themes.instance.currentTheme = headingInfo;
+						// ===== show current selection
+						const base_mapserver_url:String = AppConfig.instance.base_mapserver_url;
+						var imageInfo:ImageLayerVO;
+						var pointInfo:PointLayerVO;
+						var themeInfo:ThemeLayerVO;
+						var dynamicInfo:DynamicLayerVO;
+						var aSliderLabels:Array = [];
+						var aSliderYears:Array = [];
+						var oGraphicsLayer:GraphicsLayer;
+						for (var i:int=0; i < headingInfo.theme.length; i++) 
+						{
+							this.setUpStats(headingInfo.stats);
+							switch (headingInfo.theme[i].type) 
+							{
+								case "image":
+									imageInfo = headingInfo.theme[i] as ImageLayerVO;
+									
+									aSliderLabels.push(imageInfo.label);
+									if (imageBottomURL == "")
+									{
+										imageBottomURL = base_mapserver_url + imageInfo.id + MAP_URL_SUFFIX;
+									} 
+										
+									else if (imageMiddleURL == "") 
+									{
+										showTwo = false;
+										imageMiddleURL = base_mapserver_url + imageInfo.id + MAP_URL_SUFFIX;
+									}
+									else if (imageTopURL == "") 
+									{
+										showTwo = true;
+										imageTopURL = base_mapserver_url + imageInfo.id + MAP_URL_SUFFIX;
+									}
+									
+									break;
+								case "dynamic":
+									dynamicInfo = headingInfo.theme[i] as DynamicLayerVO;
+									//debug(" :: imageInfo for layer '" + i + "' = " + ObjectUtil.toString(imageInfo));
+									dynamicURL = base_mapserver_url + dynamicInfo.id + MAP_URL_SUFFIX + "/";
+									acDynamicVisibleLayers = new ArrayCollection(dynamicInfo.layers);
+									break;
+								case "flare":
+									pointInfo = headingInfo.theme[i];
+									aSliderYears = pointInfo.years;
+									this.flare_tooltip_data = pointInfo.tooltip_data;
+									//the rest is the same as 1st point layer
+									firstFeatureURL = base_mapserver_url + pointInfo.id + MAP_URL_SUFFIX + "/" + pointInfo.layer_id;
+									FirstFeatureLAYER.outFields = pointInfo.fields;
+									this.first_feature_markers = pointInfo.markers;
+									this.legendSetup(pointInfo.markers, AppConfig.instance.MARKER_TYPE_FIRST);
+									break;
+								case "point":
+									pointInfo = headingInfo.theme[i];
+									//NOTE: url needs to be the last thing set
+									if (firstFeatureURL == "") {
+										firstFeatureURL = base_mapserver_url + pointInfo.id + MAP_URL_SUFFIX + "/" + pointInfo.layer_id;
+										FirstFeatureLAYER.outFields = pointInfo.fields;
+										this.first_feature_markers = pointInfo.markers;
+										this.legendSetup(pointInfo.markers, AppConfig.instance.MARKER_TYPE_FIRST);
+									} else if (secondFeatureURL == "") {
+										secondFeatureURL = base_mapserver_url + pointInfo.id + MAP_URL_SUFFIX + "/" + pointInfo.layer_id;
+										SecondFeatureLAYER.outFields = pointInfo.fields;
+										this.second_feature_markers = pointInfo.markers;
+										this.legendSetup(pointInfo.markers, AppConfig.instance.MARKER_TYPE_SECOND);
+									}
+									break;
+								case "theme":
+									themeInfo = headingInfo.theme[i];
+									this.legendSetup(themeInfo.markers, AppConfig.instance.MARKER_TYPE_THEME);
+									this.theme_markers = themeInfo.markers;
+									this.theme_tooltip_data = themeInfo.tooltip_data;
+									ThemeFeatureLAYER.outFields = themeInfo.fields;
+									themeFeatureURL = base_mapserver_url + themeInfo.id + MAP_URL_SUFFIX + "/" + themeInfo.layer_id;
+									break;
+								case "flickr":
+									pointInfo = headingInfo.theme[i];
+									this.legendSetup(pointInfo.markers, AppConfig.instance.MARKER_TYPE_PHOTO);
+									aFlickrTags = aFlickrTags.concat(pointInfo.tags); 
+									oGraphicsLayer = new GraphicsLayer();
+									oGraphicsLayer.visible = AppConfig.instance.show_markers_photo;
+									oGraphicsLayer.graphicProvider = FlickrData.instance.getGraphicsByTags(pointInfo.tags);
+									oGraphicsLayer.renderer = new MapSymbolRenderer(pointInfo.markers, this.oMap, this.GLOBAL_TOOLTIP_OBJECT, pointInfo.tooltip_data);
+									this.aFlickrLayers.addItem(oGraphicsLayer);
+									this.oMap.addLayer(oGraphicsLayer);
+									FlickrData.instance.addTagDestination(pointInfo.tags, oGraphicsLayer);									
+									break;
+								case "youtube":
+									pointInfo = headingInfo.theme[i];
+									this.legendSetup(pointInfo.markers, AppConfig.instance.MARKER_TYPE_VIDEO);
+																		
+									oGraphicsLayer = new GraphicsLayer();
+									oGraphicsLayer.visible = AppConfig.instance.show_markers_video;
+									oGraphicsLayer.graphicProvider = YouTubeData.instance.getGraphicsByTags(pointInfo.tags);
+									oGraphicsLayer.renderer = new MapSymbolRenderer(pointInfo.markers, this.oMap, this.GLOBAL_TOOLTIP_OBJECT, pointInfo.tooltip_data);
+									this.aFlickrLayers.addItem(oGraphicsLayer);
+									this.oMap.addLayer(oGraphicsLayer);
+									YouTubeData.instance.addTagDestination(pointInfo.tags, oGraphicsLayer);	
+									break;
+							}
+						}
+						
+						if (aSliderLabels.length > 1) {
+							legendSlider.maximum = aSliderLabels.length - 1;
+							legendSlider.value = 1; //CRB: Decided to use 1 always so it's always on "damaged" view first.  Was legendSlider.maximum;
+							legendSlider.labels = aSliderLabels;
+							legendSlider.visible = true;
+						} else {
+							legendSlider.maximum = 1;
+							legendSlider.value = 1;
+							legendSlider.labels = [];
+							legendSlider.visible = false;
+						}
+						
+						if (aSliderYears.length > 1) {
+							yearsSlider.minimum = aSliderYears[0];
+							yearsSlider.maximum = aSliderYears[aSliderYears.length - 1];
+							yearsSlider.value = yearsSlider.maximum;
+							yearsSlider.labels = aSliderYears;
+							yearsSlider.visible = true;
+							this.flare_selected_year = aSliderYears[aSliderYears.length-1];
+						} else {
+							yearsSlider.minimum = 0;
+							yearsSlider.maximum = 1;
+							yearsSlider.value = 1;
+							yearsSlider.labels = [];
+							yearsSlider.visible = false;
+							this.flare_selected_year = -1;
+						}
+						
+						this.locationImageURL = headingInfo.location_image_url;
+						this.heading = headingInfo.label;
+						this.description = headingInfo.description;
+						this.bThemeSelected = true;
+						this.legendTitle.text = headingInfo.legendTitle;
+						if (headingInfo.legendTitle == "")
+							showTitle = false;
+						else
+							showTitle = true;
+						//oMap.extent = headingInfo.extent;						
+						this.lExtentControl.setMapExtent(headingInfo.extent.xmin,headingInfo.extent.ymin, headingInfo.extent.xmax, headingInfo.extent.ymax);
+						if (headingInfo.scale > 0) this.lExtentControl.scale = headingInfo.scale; 
+						
+						if (!this.lExtentControl.map)
+							AppConfig.instance.initial_extent = headingInfo.extent;
+						//if (!oMap.extent.contains(headingInfo.extent)) {
+							//oMap.level--;
+						//}						
+						//this.aFlickrLayers = new ArrayCollection(this.aFlickrLayers.source);
+						//this.aVideoLayers = new ArrayCollection(this.aVideoLayers.source);
+						
+						AppController.loadFlickrByTags(aFlickrTags);
+					}										
+				} 
+					
+				else 
+				{
+					this.returnToStart();
+				}				
+			}
+			
+			private function themeList_clickHandler(event:IndexChangeEvent):void 
+			{
+				this.updateSelectedTheme(event.currentTarget.selectedItem as HeadingVO);
+			}
+			
+			private function onUpdateSelectedTheme(event:AppEvent):void
+			{
+				var selectedTheme:HeadingVO = event.data as HeadingVO;
+				this.updateSelectedTheme(selectedTheme);
+				this.themeList.selectedItem = selectedTheme;
+			}
+			
+			// LEGEND =========================================================================================
+			private function legendSetup(markers:ArrayCollection, marker_type:String):void {
+				var oLegendItem:LegendItem;
+				for (var j:Number = 0; j < markers.length; j++) 
+				{
+					oLegendItem = new LegendItem();
+					oLegendItem.setup(markers[j]);
+					oLegendItem.marker_type = (markers.length > 1) ? AppConfig.instance.MARKER_TYPE_THEME : marker_type;
+					//oLegendItem.id = j.toString();
+					this.pnlLegend.addElement(oLegendItem);
+				}
+			}
+			
+			// IMAGE THEME SLIDER ============================================================================
+			private var bLegendSliderThumbDragging:Boolean = false;
+			private function legendSlider_complete():void 
+			{
+				legendSlider.value = Math.round(legendSlider.value);
+				bLegendSliderThumbDragging = false;
+			}
+			//adjust value only when clicking on slider track, not when dragging thumb
+			private function legendSlider_change():void 
+			{
+				if (!bLegendSliderThumbDragging) 
+				{
+					legendSlider.value = Math.round(legendSlider.value);
+				}
+			}
+			private function legendSlider_thumbPress():void 
+			{
+				bLegendSliderThumbDragging = true;
+			}
+
+			// YEARS THEME SLIDER ============================================================================
+			//private var bYearsSliderThumbDragging:Boolean = false;
+			private function yearsSlider_complete():void {
+				//yearsSlider.value = Math.round(yearsSlider.value);
+				this.flare_selected_year = yearsSlider.value;
+				//bYearsSliderThumbDragging = false;
+			}
+			//adjust value only when clicking on slider track, not when dragging thumb
+			private function yearsSlider_change():void {
+				//if (!bYearsSliderThumbDragging) {
+				//	yearsSlider.value = Math.round(yearsSlider.value);
+				//}
+				this.flare_selected_year = yearsSlider.value;
+			}
+			private function yearsSlider_thumbPress():void {
+				//bYearsSliderThumbDragging = true;
+			}
+
+			
+			// STATs =========================================================================================
+			private function setUpStats(theme_stats:ArrayCollection):void {
+				for (var i:int=0; i<theme_stats.length; i++) {
+					if (i==0) {
+						stat1_label = theme_stats[i].label;
+						stat1		= theme_stats[i].value;
+					}
+					else if (i==1) {
+						stat2_label = theme_stats[i].label;
+						stat2		= theme_stats[i].value;
+					}
+					else if (i==2) {
+						stat3_label = theme_stats[i].label;
+						stat3		= theme_stats[i].value;
+					}
+					else if (i==3) {
+						stat4_label = theme_stats[i].label;
+						stat4		= theme_stats[i].value;
+					}
+
+				}
+			}
+			// DEBUG ==========================================================================================
+			private function debug(message:String):void {
+				//trace("Main" + message);
+			}
+
+			private function init():void 
+			{
+				if (FlexGlobals.topLevelApplication.parameters.topMargin) {
+					this.top = FlexGlobals.topLevelApplication.parameters.topMargin;
+					this.iPaddingTop = FlexGlobals.topLevelApplication.parameters.topMargin;
+				}
+				if (FlexGlobals.topLevelApplication.parameters.bottomMargin) {
+					this.bottom =  FlexGlobals.topLevelApplication.parameters.bottomMargin;
+					this.iPaddingBottom = FlexGlobals.topLevelApplication.parameters.bottomMargin; 
+				}
+				if (FlexGlobals.topLevelApplication.parameters.rightMargin) {
+					this.right =  FlexGlobals.topLevelApplication.parameters.rightMargin;
+					this.iPaddingRight = FlexGlobals.topLevelApplication.parameters.rightMargin;
+				}
+				if (FlexGlobals.topLevelApplication.parameters.leftMargin) {
+					this.left =  FlexGlobals.topLevelApplication.parameters.leftMargin;
+					this.iPaddingLeft = FlexGlobals.topLevelApplication.parameters.leftMargin;
+				}
+				
+				AppController.addEventListener(AppEvent.UPDATE_SELECTED_THEME, onUpdateSelectedTheme);
+				AppController.initialViewLoaded();
+			}
+
+			protected function returnToStart():void
+			{
+				this.bThemeSelected = false;
+				this.clearPreviousSelection(true);
+				this.themeList.selectedIndex = -1;
+				legendSlider.visible = false;
+				yearsSlider.visible = false;
+				//oMap.extent = AppConfig.instance.initial_extent;
+				this.lExtentControl.setMapExtent(AppConfig.instance.initial_extent.xmin,AppConfig.instance.initial_extent.ymin, AppConfig.instance.initial_extent.xmax, AppConfig.instance.initial_extent.ymax);
+				if (AppConfig.instance.initial_scale > 0) this.lExtentControl.scale = AppConfig.instance.initial_scale; 
+				//if (!this.oMap.extent.contains(AppConfig.instance.initial_extent))
+					//oMap.level--;
+				
+			}
+
+		]]>
+	</fx:Script>
+</s:BorderContainer>

@@ -1,0 +1,24 @@
+<config>
+	<application_url>http://www.eyesonsyria.org/index.html</application_url>
+	<!-- Prod Amnesty FB Key - doesn't work -->
+	<!-- <facebook_app_id>115818588518106</facebook_app_id>-->
+	
+	<!-- Blue Raster FB Key for Eyes on Syria - use for production -->
+	<!-- <facebook_app_id>198623183543770</facebook_app_id>-->
+	
+	<!-- Blue Raster Staging FB Key-->
+	<facebook_app_id>341893729238876</facebook_app_id>
+	
+	<!--<initial_extent xmin="3871862" ymin="3891359" xmax="4693713" ymax="4416023" scale="2000000"/>-->
+	<initial_extent xmin="3871862" ymin="3891359" xmax="4693713" ymax="4416023" scale="4622324" />
+	<topo_url>http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer</topo_url>
+	<ve_access_key></ve_access_key>
+	<ve_map_style>aerial</ve_map_style>
+	<twitter_hash_tag>eyesonsyria</twitter_hash_tag>
+	<introText><![CDATA[Amnesty International considers that the crimes being committed in Syria, <b>including torture, murder, arbitrary detention,</b> amount to crimes against humanity as they appear to be part of a widespread, as well as systematic, attack against the civilian population. 
+<br><br>	
+Explore for yourself the individual stories behind these crime cases and call on the UN Security Council to refer the situation to the International Criminal Court.]]></introText>
+
+	<highlight_new color="0xFF3300" blur="6" strength="6" days="21" hours="0" minutes="0" seconds="0"/>
+	<default_theme>disappearance</default_theme>
+</config>

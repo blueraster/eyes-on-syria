@@ -1,0 +1,14 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+
+.mapStyle
+{
+	navigation-style-name: navigationStyle;
+}
+
+.navigationStyle
+{
+	top: 5;
+	left: 15;
+}

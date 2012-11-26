@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aliases>
+	<alias>
+		<type>tile</type>		
+		<id>physical</id>		
+		<label>Topo</label>		
+		<thumb>content/basemap/topographic.jpg</thumb>
+		<url>http://services.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer</url>				
+	</alias>
+	<alias default="true">
+		<type>openstreet</type>		
+		<id>streets</id>		
+		<label>OpenStreetMap</label>
+		<thumb>content/basemap/temposm.jpg</thumb>
+		<url>http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer</url>
+	</alias>
+	<alias>
+		<type>tile</type>
+		<id>satellite</id>			
+		<label>Aerial</label>
+		<thumb>content/basemap/imagery.jpg</thumb>
+		<url>http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer</url>
+	</alias>			
+	<alias>
+		<type>tile</type>
+		<id>relief</id>				
+		<label>Relief</label>
+		<thumb>content/basemap/relief.jpg</thumb>
+		<url>http://server.arcgisonline.com/ArcGIS/rest/services/World_Shaded_Relief/MapServer</url>
+	</alias>	
+</aliases>

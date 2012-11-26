@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				   xmlns:s="library://ns.adobe.com/flex/spark" 
+				   xmlns:mx="library://ns.adobe.com/flex/mx" backgroundAlpha="0"
+				   minHeight="0" minWidth="0" 
+				   borderVisible="false" borderWeight="0"
+				   alpha="{this.data == Basemap.instance.selected ? 1 : 0.9}"
+				   toolTip="{this.data.tooltip}" 				   
+				   useHandCursor="true" buttonMode="true">
+	
+	<fx:Declarations>
+		<s:GlowFilter id="glowFilterBlack" color="0x000000"/>
+		<s:GlowFilter id="glowFilterGrey" color="0xcccccc"/>
+	</fx:Declarations>
+	
+	<s:layout>
+		<s:VerticalLayout horizontalAlign="center" gap="3"/>
+	</s:layout>
+	
+	<s:Group width="86" height="59" 
+			 click="{this.dispatchEvent(new MouseEvent(MouseEvent.CLICK)); Basemap.instance.selected = this.data}">
+		<s:BorderContainer verticalCenter="0" horizontalCenter="0"
+						   minHeight="0" minWidth="0" cornerRadius="0" 
+						   borderWeight="2" borderColor="0xffffff" 
+						   borderAlpha="{this.data == Basemap.instance.selected ? 1 : 0.4}"
+						   backgroundAlpha="0" 
+						   filters="{this.data == Basemap.instance.selected ? [this.glowFilterBlack, this.glowFilterGrey] : []}">
+			<mx:Image source="{this.data.thumb}" width="80" height="53"/>
+		</s:BorderContainer>
+	</s:Group>
+	
+	<s:Label text="{this.data.label}" fontSize="11" fontWeight="{this.data == Basemap.instance.selected ? 'bold' : 'normal'}" 
+			 click="{this.dispatchEvent(new MouseEvent(MouseEvent.CLICK));Basemap.instance.selected = this.data}"/>
+	
+	<fx:Script>
+		<![CDATA[						
+			[Bindable]
+			public var data:BasemapVO;
+		]]>
+	</fx:Script>
+</s:BorderContainer>

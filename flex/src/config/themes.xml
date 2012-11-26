@@ -1,0 +1,294 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<themes>
+	<NODE heading="true" label="Urgent Actions and Web Actions"></NODE>
+		<NODE heading="false" label="Enforced Disappearances" id="disappearance">
+			<point_layers>
+				<layer type="flickr" id="extractive_photos" tooltip_labelField="title">
+					<tag>eyesonsyria:subtheme=disappearance</tag>
+					<tooltip_data label="Description" format="LongText"
+						fieldname="_content" />
+					<tooltip_data label="Thumb" format="Image" fieldname="url_t" />
+					<legend>
+						<marker url="config/markers/action_r1_exclamation-pt.png"
+							outlinecolor="0x000000" label="Stories & Photos" />
+					</legend>
+				</layer>
+					<layer type="youtube" id="force_videos" tooltip_labelField="title">
+					<tag>disappearance</tag>
+					<tooltip_data label="Description" format="LongText"
+						fieldname="description" />
+					<tooltip_data label="Thumb" format="Image" fieldname="thumbnail" />
+					<legend>
+						<marker url="config/markers/video_r1_purple.png"
+							outlinecolor="0x000000" label="Stories & Videos" />
+					</legend>
+				</layer>
+			</point_layers>
+			<description><![CDATA[For decades, enforced disappearances have been the hallmark of the Syrian regime, used as a means to target thousands of activists and dissidents while keeping their families in a state of despair and fear. The harsh response to the uprising led to a dramatic rise in the authorities’ use of enforced disappearances to silence opposition and sow fear among the friends and relatives of the disappeared.<br><br><i>Names and boundary representation do not necessarily constitute endorsement by AI.</i>]]></description>
+			<extent xmin="3871862" ymin="3891359" xmax="4693713" ymax="4416023" />
+		</NODE>
+		<NODE heading="false" label="Take Action" id="takeaction">
+			<point_layers>
+				<layer type="flickr" id="extractive_photos" tooltip_labelField="title">
+					<tag>eyesonsyria:theme=takeaction</tag>
+					<tooltip_data label="Description" format="LongText"
+						fieldname="_content" />
+					<tooltip_data label="Thumb" format="Image" fieldname="url_t" />
+					<legend>
+						<marker url="config/markers/action_r1_exclamation-pt.png"
+							outlinecolor="0x000000" label="Stories & Photos" />
+					</legend>
+				</layer>
+					<layer type="youtube" id="force_videos" tooltip_labelField="title">
+					<tag>takeaction</tag>
+					<tooltip_data label="Description" format="LongText"
+						fieldname="description" />
+					<tooltip_data label="Thumb" format="Image" fieldname="thumbnail" />
+					<legend>
+						<marker url="config/markers/video_r1_purple.png"
+							outlinecolor="0x000000" label="Stories & Videos" />
+					</legend>
+				</layer>
+			</point_layers>
+			<description><![CDATA[Speak out about the deteriorating human rights situation in Syria! You can take action on urgent human rights issues and on behalf of individuals at risk in Syria through cases on this map.<br><br><i>Names and boundary representation do not necessarily constitute endorsement by AI.</i>]]></description>
+			<extent xmin="3871862" ymin="3891359" xmax="4693713" ymax="4416023" />
+		</NODE>
+	<NODE heading="true" label="Documentation"></NODE>
+		<NODE heading="false" label="Aleppo" id="aleppo">
+			<point_layers>
+				<layer type="flickr" id="excessive_force_photos"
+					tooltip_labelField="title">
+					<tag>eyesonsyria:subtheme=aleppo</tag>
+					<tooltip_data label="Description" format="LongText"
+						fieldname="_content" />
+					<tooltip_data label="Thumb" format="Image" fieldname="url_t" />
+					<legend>
+						<marker url="config/markers/stories_r1_green.png"
+							outlinecolor="0x000000" label="Stories & Photos" />
+					</legend>
+				</layer>	
+				<layer type="youtube" id="force_videos" tooltip_labelField="title">
+					<tag>aleppo</tag>
+					<tooltip_data label="Description" format="LongText"
+						fieldname="description" />
+					<tooltip_data label="Thumb" format="Image" fieldname="thumbnail" />
+					<legend>
+						<marker url="config/markers/video_r1_purple.png"
+							outlinecolor="0x000000" label="Stories & Videos" />
+					</legend>
+				</layer>
+			</point_layers>
+	
+			<description><![CDATA[Amnesty International’s report <i>All-Out Repression</i> is based on field investigations in Aleppo city in May 2012. It documents how security forces and the government-backed shabiha militias routinely used live fire against peaceful demonstrations, killing and injuring protesters and bystanders, including children, and hunted down the wounded, the medics who treated them, and opposition activists. <br><br> <i>Names and boundary representation do not necessarily constitute endorsement by AI.</i>]]></description>
+			<extent xmin="4113571" ymin="4315475" xmax="4164173" ymax="4342534" scale="144448" />
+		</NODE>
+
+		<NODE heading="false" label="Unlawful Executions" id="executions">
+			<point_layers>
+				<layer type="flickr" id="excessive_force_photos"
+					tooltip_labelField="title">
+					<tag>eyesonsyria:subtheme=killings</tag>
+					<tooltip_data label="Description" format="LongText"
+						fieldname="_content" />
+					<tooltip_data label="Thumb" format="Image" fieldname="url_t" />
+					<legend>
+						<marker url="config/markers/stories_r1_green.png"
+							outlinecolor="0x000000" label="Stories & Photos" />
+					</legend>
+				</layer>	
+				<layer type="youtube" id="force_videos" tooltip_labelField="title">
+					<tag>killings</tag>
+					<tooltip_data label="Description" format="LongText"
+						fieldname="description" />
+					<tooltip_data label="Thumb" format="Image" fieldname="thumbnail" />
+					<legend>
+						<marker url="config/markers/video_r1_purple.png"
+							outlinecolor="0x000000" label="Stories & Videos" />
+					</legend>
+				</layer>
+			</point_layers>
+	
+			<description><![CDATA[The report <i>Deadly Reprisals: Deliberate killings and other abuses by Syria’s armed forces</i> documents the full range of unlawful killings being committed by the Syrian government’s armed forces and militias. Syrian armed forces have deliberately and unlawfully killed (extrajudicially executed) civilians not involved in fighting, as well as armed opposition fighters who had been captured or wounded. The indiscriminate firing of bullets and shells in civilian residential areas has also led to unlawful killing and injury of civilians. <br><br><i>Names and boundary representation do not necessarily constitute endorsement by AI.</i>]]></description>
+			<extent xmin="3986252" ymin="4179067" xmax="4432644" ymax="4416327" scale="2000000" />
+		</NODE>
+		<NODE heading="false" label="Destruction of Property" id="destruction_of_property">
+			<point_layers>
+				<layer type="flickr" id="excessive_force_photos"
+					tooltip_labelField="title">
+					<tag>eyesonsyria:subtheme=propertydestruction</tag>
+					<tooltip_data label="Description" format="LongText"
+						fieldname="_content" />
+					<tooltip_data label="Thumb" format="Image" fieldname="url_t" />
+					<legend>
+						<marker url="config/markers/stories_r1_green.png"
+							outlinecolor="0x000000" label="Stories & Photos" />
+					</legend>
+				</layer>	
+				<layer type="youtube" id="force_videos" tooltip_labelField="title">
+					<tag>propertydestruction</tag>
+					<tooltip_data label="Description" format="LongText"
+						fieldname="description" />
+					<tooltip_data label="Thumb" format="Image" fieldname="thumbnail" />
+					<legend>
+						<marker url="config/markers/video_r1_purple.png"
+							outlinecolor="0x000000" label="Stories & Videos" />
+					</legend>
+				</layer>
+			</point_layers>
+	
+			<description><![CDATA[The report <i>Deadly Reprisals: Deliberate killings and other abuses by Syria’s armed forces</i> documents the use of arson by Syrian government armed forces and militias, causing a level of gratuitous damage beyond anything that could possibly have been caused by clashes with armed groups. Houses and other properties were systematically burned down, in an obviously deliberate manner, in nearly every town that AI visited. Residents’ committees and AI research tallies more than 1,500 homes, shops, and other properties that were completely or partially burned, destroyed or otherwise damaged. <br><br><i>Names and boundary representation do not necessarily constitute endorsement by AI.</i>]]></description>
+			<extent xmin="3986252" ymin="4179067" xmax="4432644" ymax="4416327" scale="2000000" />
+		</NODE>
+		<NODE heading="false" label="Deaths in Custody" id="deadlydetention">
+			<point_layers>
+				<layer type="flickr" id="excessive_force_photos"
+					tooltip_labelField="title">
+					<tag>eyesonsyria:subtheme=deadlydetention</tag>
+					<tooltip_data label="Description" format="LongText"
+						fieldname="_content" />
+					<tooltip_data label="Thumb" format="Image" fieldname="url_t" />
+					<legend>
+						<marker url="config/markers/stories_r1_green.png"
+							outlinecolor="0x000000" label="Stories & Photos" />
+					</legend>
+				</layer>
+				<layer type="youtube" id="force_videos" tooltip_labelField="title">
+					<tag>deadlydetention</tag>
+					<tooltip_data label="Description" format="LongText"
+						fieldname="description" />
+					<tooltip_data label="Thumb" format="Image" fieldname="thumbnail" />
+					<legend>
+						<marker url="config/markers/video_r1_purple.png"
+							outlinecolor="0x000000" label="Stories & Videos" />
+					</legend>
+				</layer>
+			</point_layers>
+	
+			<description><![CDATA[The report <i>Deadly detention: Deaths in custody amid popular protest in Syria</i> shows the spike in deaths in custody during the recent crackdown. Similar to other Amnesty International research, it shows how crimes against humanity—including murder and torture—appear to have been committed. You can provide information on the cases shown in this map through the <i>Tell Us</i> section.<br><br><i>Names and boundary representation do not necessarily constitute endorsement by AI.</i>]]></description>
+			<extent xmin="3871862" ymin="3891359" xmax="4693713" ymax="4416023" />
+
+		</NODE>
+				<NODE heading="false" label="Torture" id="torture">
+			<point_layers>
+				<layer type="flickr" id="excessive_force_photos"
+					tooltip_labelField="title">
+					<tag>eyesonsyria:subtheme=torture</tag>
+					<tooltip_data label="Description" format="LongText"
+						fieldname="_content" />
+					<tooltip_data label="Thumb" format="Image" fieldname="url_t" />
+					<legend>
+						<marker url="config/markers/stories_r1_green.png"
+							outlinecolor="0x000000" label="Stories & Photos" />
+					</legend>
+				</layer>	
+				<layer type="flickr" id="excessive_force_photos"
+					tooltip_labelField="title">
+					<tag>eyesonsyria:subtheme=torturefacility</tag>
+					<tooltip_data label="Description" format="LongText"
+						fieldname="_content" />
+					<tooltip_data label="Thumb" format="Image" fieldname="url_t" />
+					<legend>
+						<marker url="config/markers/facilities.png"
+							outlinecolor="0x000000" label="Facilities" />
+					</legend>
+				</layer>
+				<layer type="youtube" id="force_videos" tooltip_labelField="title">
+					<tag>torture</tag>
+					<tooltip_data label="Description" format="LongText"
+						fieldname="description" />
+					<tooltip_data label="Thumb" format="Image" fieldname="thumbnail" />
+					<legend>
+						<marker url="config/markers/video_r1_purple.png"
+							outlinecolor="0x000000" label="Stories & Videos" />
+					</legend>
+				</layer>
+			</point_layers>
+	
+			<description><![CDATA[The scale of torture and other ill-treatment by security forces and the army has risen to a level not witnessed in Syria for years. Security forces actively subject detainees to electric shocks, prolonged and painful stress positions, including being suspended, sleep deprivation, flogging and beatings and inhumane living conditions.  The accounts presented here are from people across Syria who were detained and tortured in Syria between March 2011 and May 2012, and interviewed by AI in both Jordan and Syria in 2012. <br><br><i>Names and boundary representation do not necessarily constitute endorsement by AI.</i>]]></description>
+			<extent xmin="3871862" ymin="3891359" xmax="4693713" ymax="4416023" />
+		</NODE>
+		<NODE heading="false" label="Harassment of Expatriates" id="harassment">
+			<point_layers>
+				<layer type="flickr" id="excessive_force_photos"
+					tooltip_labelField="title">
+					<tag>eyesonsyria:subtheme=harassment</tag>
+					<tooltip_data label="Description" format="LongText"
+						fieldname="_content" />
+					<tooltip_data label="Thumb" format="Image" fieldname="url_t" />
+					<legend>
+						<marker url="config/markers/stories_r1_green.png"
+							outlinecolor="0x000000" label="Stories & Photos" />
+					</legend>
+				</layer>	
+				<layer type="youtube" id="force_videos" tooltip_labelField="title">
+					<tag>harassment</tag>
+					<tooltip_data label="Description" format="LongText"
+						fieldname="description" />
+					<tooltip_data label="Thumb" format="Image" fieldname="thumbnail" />
+					<legend>
+						<marker url="config/markers/video_r1_purple.png"
+							outlinecolor="0x000000" label="Stories & Videos" />
+					</legend>
+				</layer>
+			</point_layers>
+	
+			<description><![CDATA[Pro-reform Syrians abroad are under various forms of pressure to end their protests which include: being violently attacked; having relatives in Syria attacked or threatened; Syrian embassy staff filming or taking photographs of pro-reform protests and allegedly sending those images to Damascus. For more details, explore individual cases in eight countries.<br><br><i>Names and boundary representation do not necessarily constitute endorsement by AI.</i>]]></description>
+			<extent xmin="-20219508" ymin="-8206810" xmax="29248090" ymax="13826621" />
+		</NODE>
+
+		<!-- NODE heading="false" label="Tell Kalakh">
+			<point_layers>
+				<layer type="flickr" id="excessive_force_photos"
+					tooltip_labelField="title">
+					<tag>eyesonsyria:subtheme=tellkalakh</tag>
+					<tooltip_data label="Description" format="LongText"
+						fieldname="_content" />
+					<tooltip_data label="Thumb" format="Image" fieldname="url_t" />
+					<legend>
+						<marker url="config/markers/stories_r1_green.png"
+							outlinecolor="0x000000" label="Stories & Photos" />
+					</legend>
+				</layer>
+				<layer type="youtube" id="force_videos" tooltip_labelField="title">
+					<tag>tellkalakh</tag>
+					<tooltip_data label="Description" format="LongText"
+						fieldname="description" />
+					<tooltip_data label="Thumb" format="Image" fieldname="thumbnail" />
+					<legend>
+						<marker url="config/markers/video_r1_purple.png"
+							outlinecolor="0x000000" label="Stories & Videos" />
+					</legend>
+				</layer>
+			</point_layers>
+			<description><![CDATA[Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ]]></description>
+			<extent xmin="4035904" ymin="4118313" xmax="4037548" ymax="4119648" />
+		</NODE-->
+	<NODE heading="true" label="International Solidarity"></NODE>
+		<NODE heading="false" label="Activism Stories" id="activism">
+			<point_layers>
+				<layer type="flickr" id="extractive_photos" tooltip_labelField="title">
+					<tag>eyesonsyria:theme=activism</tag>
+					<tooltip_data label="Description" format="LongText"
+						fieldname="_content" />
+					<tooltip_data label="Thumb" format="Image" fieldname="url_t" />
+					<legend>
+						<marker url="config/markers/stories_r1_green.png"
+							outlinecolor="0x000000" label="Stories & Photos" />
+					</legend>
+				</layer>
+				<layer type="youtube" id="force_videos" tooltip_labelField="title">
+					<tag>activism</tag>
+					<tooltip_data label="Description" format="LongText"
+						fieldname="description" />
+					<tooltip_data label="Thumb" format="Image" fieldname="thumbnail" />
+					<legend>
+						<marker url="config/markers/video_r1_purple.png"
+							outlinecolor="0x000000" label="Stories & Videos" />
+					</legend>
+				</layer>
+			</point_layers>
+			<description><![CDATA[We are tracking the activities and activism of Amnesty International supporters around the world on Syria in order to send a strong message of solidarity with peaceful protesters in Syria. You can contribute to this effort by sending us your activism photos and videos through the Tell Us section.<br><br><i>Names and boundary representation do not necessarily constitute endorsement by AI.</i>]]></description>
+			<extent xmin="-20219508" ymin="-8206810" xmax="29248090" ymax="13826621" />
+		</NODE>
+
+</themes>

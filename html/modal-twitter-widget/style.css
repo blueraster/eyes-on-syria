@@ -1,0 +1,33 @@
+.twitter-modal {
+	background: #fff url("close-tray.png") no-repeat right 5px;
+	border: #fff solid 5px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	box-shadow: rgba(0, 0, 0, 0.25) 0 0 10px;
+	-moz-box-shadow: rgba(0, 0, 0, 0.25) 0 0 10px;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.25) 0 0 10px;
+	cursor: pointer;
+	opacity: .9;
+	filter:alpha(opacity=80);
+	padding-top: 20px;
+	position: absolute;
+	right: 20px;
+	top: -5px;
+	z-index: 500;
+}
+
+.twitter-modal.retracted {
+	background: #fff url("open-tray.png") no-repeat right 5px;
+}
+
+.twitter-modal .tray-wrap {
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	box-shadow: rgba(0, 0, 0, 0.25) 0 0 5px;
+	-moz-box-shadow: rgba(0, 0, 0, 0.25) 0 0 5px;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.25) 0 0 5px;
+	cursor: default;
+	margin-top: 5px;
+}
